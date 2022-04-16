@@ -15,8 +15,23 @@ enum class GUI_Element_State{
     Neutral, Focused, Clicked
 };
 
-class GUI_Style {
+struct GUI_Style {
+    GUI_Style();
 
+    sf::Vector2f            m_size;
+    sf::Vector2f            m_textPadding;
+    sf::Vector2f            m_glyphPadding;
+
+    sf::Color               m_backgroundColor;
+    sf::Color               m_backgroundImageColor;
+    sf::Color               m_elementColor;
+    sf::Color               m_textColor;
+
+    std::string             m_backgroundImageStr;
+    std::string             m_textFontStr;
+    bool m_textCenterOrigin;
+
+    std::string m_glyph;
 };
 
 struct GUI_Visual{
