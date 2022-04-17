@@ -17,8 +17,9 @@ enum class GUI_Element_State{
 
 struct GUI_Style {
     GUI_Style();
+    ~GUI_Style() = default;
 
-    sf::Vector2f            m_size;
+    sf::Vector2f            m_ElementSize;
     sf::Vector2f            m_textPadding;
     sf::Vector2f            m_glyphPadding;
 
@@ -28,10 +29,11 @@ struct GUI_Style {
     sf::Color               m_textColor;
 
     std::string             m_backgroundImageStr;
-    std::string             m_textFontStr;
-    bool m_textCenterOrigin;
-
     std::string m_glyph;
+    std::string             m_textFontStr;
+
+    unsigned int            m_textSize;
+    bool                    m_textCenterOrigin;
 };
 
 struct GUI_Visual{
