@@ -8,6 +8,8 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+
 // GUI_Element_State and GUI_Style are coupled in GUI_Element.hpp as
 // using ElementStyles = std::unordered_map<GUI_Element_State, GUI_Style>;
 
@@ -29,7 +31,7 @@ struct GUI_Style {
     sf::Color               m_textColor;
 
     std::string             m_backgroundImageStr;
-    std::string m_glyph;
+    std::string             m_glyph;
     std::string             m_textFontStr;
 
     unsigned int            m_textSize;
@@ -37,10 +39,10 @@ struct GUI_Style {
 };
 
 struct GUI_Visual{
-    sf::RectangleShape  m_backgroundSolid;
-    sf::Sprite          m_backgroundImage;
-    sf::Sprite          m_glyph; 
-    sf::Text            m_text;
+    sf::RectangleShape      m_backgroundSolid;
+    sf::Sprite              m_backgroundImage;
+    sf::Sprite              m_glyph;
+    sf::Text                m_text;
 };
 
 #endif //ENEMATA_GUI_STYLE_HPP

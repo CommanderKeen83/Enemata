@@ -12,7 +12,7 @@
 #include "../Utils.hpp"
 
 
-GUI_Interface::GUI_Interface(const std::string l_name, GUI_Manager *l_gui_manager)
+GUI_Interface::GUI_Interface(const std::string& l_name, GUI_Manager *l_gui_manager)
 // every interface is logically a Window. Also, it cannot be owned by other GUI_Elements, but it owns all GUI_Elements
 // attached to itself
 : GUI_Element(l_name, GUI_Element_Type::Window, this){
@@ -66,4 +66,20 @@ void GUI_Interface::readLine(std::stringstream &l_ss) {
 
 void GUI_Interface::toggleTitleBar() {
     m_showTitleBar = !m_showTitleBar;
+}
+
+void GUI_Interface::onClick(const sf::Vector2f &l_mousePosition) {
+
+}
+
+void GUI_Interface::onHover(const sf::Vector2f &l_mousePosition) {
+
+}
+
+void GUI_Interface::onLeave() {
+
+}
+
+void GUI_Interface::onRelease() {
+
 }
