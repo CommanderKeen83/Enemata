@@ -28,6 +28,11 @@ private:
     void onLeave() override;
     void onRelease() override;
 
+public:
+    void update(const float &l_dt) override;
+
+    void draw(sf::RenderTarget *l_renderTarget) override;
+
 private:
     std::unique_ptr<sf::RenderTexture> m_backdropTexture;
     std::unique_ptr<sf::RenderTexture> m_contentTexture;

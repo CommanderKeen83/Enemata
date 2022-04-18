@@ -83,3 +83,11 @@ void GUI_Interface::onLeave() {
 void GUI_Interface::onRelease() {
 
 }
+
+void GUI_Interface::update(const float &l_dt) {
+
+}
+
+void GUI_Interface::draw(sf::RenderTarget *l_renderTarget) {
+
+}
