@@ -1,3 +1,0 @@
--x c++-module
--fmodule-output=CMakeFiles/ConsoleEnemata.dir/SharedState-EventType.pcm
--fmodule-file=Utils=CMakeFiles/ConsoleEnemata.dir/Utils.pcm

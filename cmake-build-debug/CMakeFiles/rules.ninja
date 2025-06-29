@@ -16,7 +16,7 @@
 
 rule CXX_SCAN__ConsoleEnemata_Debug
   depfile = $DEP_FILE
-  command = "/opt/homebrew/Cellar/llvm/20.1.7/bin/clang-scan-deps" -format=p1689 -- /opt/homebrew/opt/llvm/bin/clang++ $DEFINES $INCLUDES $FLAGS -x c++ $in -c -o $OBJ_FILE -resource-dir "/opt/homebrew/Cellar/llvm/20.1.7/lib/clang/20" -MT $DYNDEP_INTERMEDIATE_FILE -MD -MF $DEP_FILE > $DYNDEP_INTERMEDIATE_FILE.tmp && mv $DYNDEP_INTERMEDIATE_FILE.tmp $DYNDEP_INTERMEDIATE_FILE
+  command = C:\WINDOWS\system32\cmd.exe /C ""C:/clang+llvm-20.1.7-x86_64-pc-windows-msvc/bin/clang-scan-deps.exe" -format=p1689 -- C:\clang+llvm-20.1.7-x86_64-pc-windows-msvc\bin\clang++.exe $DEFINES $INCLUDES $FLAGS -x c++ $in -c -o $OBJ_FILE -resource-dir "C:/clang+llvm-20.1.7-x86_64-pc-windows-msvc/lib/clang/20" -MT $DYNDEP_INTERMEDIATE_FILE -MD -MF $DEP_FILE > $DYNDEP_INTERMEDIATE_FILE.tmp && "C:/Program Files/JetBrains/CLion 2023.2.5/bin/cmake/win/x64/bin/cmake.exe" -E rename $DYNDEP_INTERMEDIATE_FILE.tmp $DYNDEP_INTERMEDIATE_FILE"
   description = Scanning $in for CXX dependencies
 
 
@@ -24,7 +24,7 @@ rule CXX_SCAN__ConsoleEnemata_Debug
 # Rule to generate ninja dyndep files for CXX.
 
 rule CXX_DYNDEP__ConsoleEnemata_Debug
-  command = /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -E cmake_ninja_dyndep --tdi=CMakeFiles/ConsoleEnemata.dir/CXXDependInfo.json --lang=CXX --modmapfmt=clang --dd=$out @$out.rsp
+  command = "C:\Program Files\JetBrains\CLion 2023.2.5\bin\cmake\win\x64\bin\cmake.exe" -E cmake_ninja_dyndep --tdi=CMakeFiles\ConsoleEnemata.dir\CXXDependInfo.json --lang=CXX --modmapfmt=clang --dd=$out @$out.rsp
   description = Generating CXX dyndep file $out
   rspfile = $out.rsp
   rspfile_content = $in
@@ -37,7 +37,7 @@ rule CXX_DYNDEP__ConsoleEnemata_Debug
 rule CXX_COMPILER__ConsoleEnemata_scanned_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}/opt/homebrew/opt/llvm/bin/clang++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE @$DYNDEP_MODULE_MAP_FILE -o $out -c $in
+  command = ${LAUNCHER}${CODE_CHECK}C:\clang+llvm-20.1.7-x86_64-pc-windows-msvc\bin\clang++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE @$DYNDEP_MODULE_MAP_FILE -o $out -c $in
   description = Building CXX object $out
 
 
@@ -47,7 +47,7 @@ rule CXX_COMPILER__ConsoleEnemata_scanned_Debug
 rule CXX_COMPILER__ConsoleEnemata_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}/opt/homebrew/opt/llvm/bin/clang++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = ${LAUNCHER}${CODE_CHECK}C:\clang+llvm-20.1.7-x86_64-pc-windows-msvc\bin\clang++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
   description = Building CXX object $out
 
 
@@ -55,7 +55,7 @@ rule CXX_COMPILER__ConsoleEnemata_unscanned_Debug
 # Rule for linking CXX executable.
 
 rule CXX_EXECUTABLE_LINKER__ConsoleEnemata_Debug
-  command = $PRE_LINK && /opt/homebrew/opt/llvm/bin/clang++ $FLAGS -Wl,-search_paths_first -Wl,-headerpad_max_install_names $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\clang+llvm-20.1.7-x86_64-pc-windows-msvc\bin\clang++.exe -nostartfiles -nostdlib $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Xlinker /MANIFEST:EMBED -Xlinker /implib:$TARGET_IMPLIB -Xlinker /pdb:$TARGET_PDB -Xlinker /version:0.0  $LINK_PATH $LINK_LIBRARIES $MANIFESTS && $POST_BUILD"
   description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
 
@@ -72,7 +72,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake --regenerate-during-build -S/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly -B/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/cmake-build-debug
+  command = "C:\Program Files\JetBrains\CLion 2023.2.5\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\Keen\OneDrive\C++\absolutly -BC:\Users\Keen\OneDrive\C++\absolutly\cmake-build-debug
   description = Re-running CMake...
   generator = 1
 
@@ -81,7 +81,7 @@ rule RERUN_CMAKE
 # Rule for cleaning all built files.
 
 rule CLEAN
-  command = /Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja $FILE_ARG -t clean $TARGETS
+  command = "C:\Program Files\JetBrains\CLion 2023.2.5\bin\ninja\win\x64\ninja.exe" $FILE_ARG -t clean $TARGETS
   description = Cleaning all built files...
 
 
@@ -89,6 +89,6 @@ rule CLEAN
 # Rule for printing all primary targets available.
 
 rule HELP
-  command = /Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -t targets
+  command = "C:\Program Files\JetBrains\CLion 2023.2.5\bin\ninja\win\x64\ninja.exe" -t targets
   description = All primary targets available:
 

@@ -1,3 +1,0 @@
--x c++-module
--fmodule-output=CMakeFiles/ConsoleEnemata.dir/SharedState-Slider.pcm
--fmodule-file=SharedState:Gui_Element=CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm
