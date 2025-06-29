@@ -1,3 +1,0 @@
-C:/Users/Keen/OneDrive/C++/absolutly/cmake-build-debug/CMakeFiles/ConsoleEnemata.dir
-C:/Users/Keen/OneDrive/C++/absolutly/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Keen/OneDrive/C++/absolutly/cmake-build-debug/CMakeFiles/rebuild_cache.dir
