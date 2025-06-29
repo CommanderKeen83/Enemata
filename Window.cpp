@@ -10,12 +10,17 @@ import :Types;
 Window::Window()
 :   m_renderWindow{},
     m_windowSize{800, 600},
-    m_isOpen{true}
+    m_isOpen{true},
+    m_isFullscreen{false}
 {
     createWindow();
     m_eventManager.registerCallback(StateType::Global,
                                     "CloseX",
                                     &Window::closeWindow,
+                                    this);
+    m_eventManager.registerCallback(StateType::Global,
+                                    "FullScreen",
+                                    &Window::toggleFullscreen,
                                     this);
 }
 Window::~Window() {
@@ -51,7 +56,12 @@ void Window::createWindow() {
 
     m_renderWindow.create(sf::VideoMode{m_windowSize}, "Enemata");
 }
-
+void Window::toggleFullscreen(EventDetails* l_details) {
+    m_renderWindow.close();
+    sf::State display_mode = m_isFullscreen ? sf::State::Windowed : sf::State::Fullscreen;
+    m_isFullscreen = !m_isFullscreen;
+    m_renderWindow.create(sf::VideoMode{m_windowSize}, "Enemata", display_mode);
+}
 void Window::clear(sf::Color l_color) {
     m_renderWindow.clear(l_color);
 }

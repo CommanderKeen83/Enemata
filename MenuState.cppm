@@ -26,6 +26,8 @@ private:
     void keyArrowUp(EventDetails* l_details = nullptr);
     void keyArrowDown(EventDetails* l_details = nullptr);
     void select(EventDetails* l_details = nullptr);
+    void startGame();
+    void quitGame();
     virtual void update(float l_dt) override;
     virtual void draw() override;
 

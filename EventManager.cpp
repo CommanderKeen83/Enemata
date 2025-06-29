@@ -109,6 +109,7 @@ void EventManager::update(float l_dt){
                 auto callback = globalCallbacks->second.find(binding_pair.first);
                 if(callback != globalCallbacks->second.end()){
                     // global Callback gets invoked
+                    Logger::getInstance().log("global for binding " + binding_pair.second.m_name + " activated");
                     callback->second(&binding_pair.second.m_event_details);
                 }
             }

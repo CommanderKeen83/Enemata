@@ -25,7 +25,7 @@ public:
 
     virtual ~Gui_Element() = default;
     virtual void read_in(std::stringstream& l_ss) = 0;
-    virtual void on_click(const sf::Vector2f& l_mousePos) = 0;
+    virtual void on_click(const sf::Vector2f& l_mousePos = {0,0}) = 0;
     virtual bool handleEvent(const sf::Event& l_event) = 0;
     virtual void update(const float& l_dt) = 0;
     virtual void draw(sf::RenderTarget* l_render_target) = 0;

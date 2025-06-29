@@ -2,6 +2,7 @@
 // Created by CommanderKeen on 15.12.24.
 //
 module;
+#include <functional>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -72,25 +73,60 @@ void MenuState::draw(){
 }
 
 void MenuState::setupGUI() {
-    auto newGameButton = std::make_unique<Button>(&m_font);
-    newGameButton->setText("New Game");
-    newGameButton->setTextSize(10);
-    newGameButton->setTextFillColor(sf::Color::White);
-    m_gui_buttons.push_back(std::move(newGameButton));
+    auto new_game_button = std::make_unique<Button>(&m_font);
+    new_game_button->setText("New Game");
+    new_game_button->setTextSize(10);
+    new_game_button->setPosition({100.f,100.f});
+    new_game_button->setTextFillColor(sf::Color::White);
+    new_game_button->setCallback(std::bind(&MenuState::startGame, this));
+
+    auto options_game_button = std::make_unique<Button>(&m_font);
+    options_game_button->setText("Options");
+    options_game_button->setTextSize(10);
+    options_game_button->setPosition({100.f,110.f});
+    options_game_button->setTextFillColor(sf::Color::White);
+
+    auto quit_game_button = std::make_unique<Button>(&m_font);
+    quit_game_button->setText("Quit");
+    quit_game_button->setTextSize(10);
+    quit_game_button->setPosition({100.f,120.f});
+    quit_game_button->setTextFillColor(sf::Color::White);
+    quit_game_button->setCallback(std::bind(&MenuState::quitGame, this));
+    m_gui_buttons.push_back(std::move(new_game_button));
+    m_gui_buttons.push_back(std::move(options_game_button));
+    m_gui_buttons.push_back(std::move(quit_game_button));
 
     m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::Red);
+}
+void MenuState::quitGame() {
+    m_shared_context->m_stateManager->switch_state(StateType::Exit);
+}
+void MenuState::startGame() {
+    m_shared_context->m_stateManager->switch_state(StateType::Game);
 }
 
 
 void MenuState::keyArrowUp(EventDetails* l_details){
     Logger::getInstance().log("MenuState::keyArrowUp");
+    m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::White);
+    m_selected_item = (m_selected_item - 1);
+    if (m_selected_item < 0) m_selected_item = m_gui_buttons.size() - 1;
+
+    m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::Red);
 }
+
 void MenuState::keyArrowDown(EventDetails* l_details){
     Logger::getInstance().log("MenuState::keyArrowDown");
 
+
+    m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::White);
+    m_selected_item = (m_selected_item + 1) % m_gui_buttons.size();
+    m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::Red);
+
 }
+
 void MenuState::select(EventDetails* l_details){
     Logger::getInstance().log("MenuState::select");
-    m_shared_context->m_stateManager->switch_state(StateType::Game);
+    m_gui_buttons[m_selected_item]->on_click();
 
 }

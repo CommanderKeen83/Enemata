@@ -10,10 +10,11 @@ import SharedState;
 export class Game{
 public:
     Game()
-    : m_window(), m_sharedContext(), m_stateManager(&m_sharedContext){
+    : m_stateManager(&m_sharedContext){
         m_sharedContext.m_window = &m_window;
         m_sharedContext.m_stateManager = &m_stateManager;
         m_sharedContext.m_eventManager = m_window.getEventManager();
+        m_sharedContext.m_guiManager = &m_guiManager;
 
         m_stateManager.switch_state(StateType::Menu);
     }

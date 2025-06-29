@@ -22,10 +22,12 @@ public:
     EventManager* getEventManager();
 private:
     void createWindow();
+    void toggleFullscreen(EventDetails* l_details);
     void closeWindow(EventDetails* = nullptr);
 
     sf::RenderWindow            m_renderWindow;
     EventManager                m_eventManager;
     sf::Vector2u                m_windowSize;
     bool                        m_isOpen;
+    bool                        m_isFullscreen;
 };

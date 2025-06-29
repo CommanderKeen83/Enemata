@@ -20,21 +20,23 @@ public:
     Button& operator=(const Button&) = delete;
     Button(Button&&) = default;
     Button& operator=(Button&&) = default;
-    virtual void read_in(std::stringstream& l_ss) override;
-    virtual void on_click(const sf::Vector2f& l_mousePos) override;
-    virtual bool handleEvent(const sf::Event& l_event) override;
-    virtual void update(const float& l_dt) override;
-    virtual void draw(sf::RenderTarget* l_render_target) override;
-    virtual void on_release() override;
-    virtual void on_hover(const sf::Vector2f& l_mousePos) override;
-    virtual void on_leave() override;
+    void read_in(std::stringstream& l_ss) override;
+    void on_click(const sf::Vector2f& l_mousePos) override;
+    void on_click();
+    bool handleEvent(const sf::Event& l_event) override;
+    void update(const float& l_dt) override;
+    void draw(sf::RenderTarget* l_render_target) override;
+    void setPosition(const sf::Vector2f l_position) override;
+    void on_release() override;
+    void on_hover(const sf::Vector2f& l_mousePos) override;
+    void on_leave() override;
 
     // custom methods for Button
    void setText(const std::string_view l_text);
    std::string getText() const;
     void setTextFillColor(const sf::Color l_color);
     void setTextSize(const int l_textSize);
-    void setCallback(std::function<void()>& l_callback);
+    void setCallback(std::function<void()>&& l_callback);
 private:
     sf::Text m_text;
     std::function<void()> m_callback;
