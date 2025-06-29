@@ -25,17 +25,17 @@ void Button::update(const float& l_dt) { }
 void Button::draw(sf::RenderTarget* l_render_target) {
     l_render_target->draw(m_text);
 }
-// std::string Button::getText() const {
-//     return m_text.getString();
-// }
+std::string Button::getText() const {
+    return m_text.getString();
+}
 void Button::on_release() {}
 void Button::on_hover(const sf::Vector2f& l_mousePos) {}
 void Button::on_leave() {}
 
 
-// void Button::setText(const std::string_view l_text) {
-//     m_text.setString(std::string(l_text));
-// }
+void Button::setText(const std::string_view l_text) {
+    m_text.setString(std::string(l_text));
+}
 
 void Button::setTextColor(const sf::Color l_color){}
 void Button::setTextSize(const int l_textSize) {
