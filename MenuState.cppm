@@ -5,12 +5,13 @@
 module;
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-
+#include <vector>
 export module SharedState:MenuState;
 
 import :BaseState;
 import :SharedContext;
 import :EventDetails;
+import :Button;
 
 export class MenuState : public BaseState{
 public:
@@ -29,5 +30,6 @@ private:
 
     std::unique_ptr<sf::Texture> m_backgroundTexture;
     std::unique_ptr<sf::Sprite> m_backgroundSprite;
+    std::vector<Button> m_gui_buttons;
 
 };
