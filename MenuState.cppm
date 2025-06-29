@@ -34,7 +34,8 @@ private:
 
     std::unique_ptr<sf::Texture> m_backgroundTexture;
     std::unique_ptr<sf::Sprite> m_backgroundSprite;
-    std::vector<Button> m_gui_buttons;
+    std::vector<std::unique_ptr<Button>> m_gui_buttons;
     sf::Font m_font;
+    int m_selected_item;
 
 };

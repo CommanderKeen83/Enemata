@@ -32,7 +32,7 @@ public:
     // custom methods for Button
    void setText(const std::string_view l_text);
    std::string getText() const;
-    void setTextColor(const sf::Color l_color);
+    void setTextFillColor(const sf::Color l_color);
     void setTextSize(const int l_textSize);
     void setCallback(std::function<void()>& l_callback);
 private:

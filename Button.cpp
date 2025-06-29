@@ -37,9 +37,11 @@ void Button::setText(const std::string_view l_text) {
     m_text.setString(std::string(l_text));
 }
 
-void Button::setTextColor(const sf::Color l_color){}
+void Button::setTextFillColor(const sf::Color l_color) {
+    m_text.setFillColor(l_color);
+}
 void Button::setTextSize(const int l_textSize) {
-//    m_text.setCharacterSize(std::max(1, l_textSize));
+    m_text.setCharacterSize(std::max(1, l_textSize));
 }
 void Button::setCallback(std::function<void()>& l_callback) {
     m_callback = l_callback;

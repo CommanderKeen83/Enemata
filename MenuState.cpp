@@ -14,7 +14,7 @@ import :EventManager;
 
 MenuState::MenuState(SharedContext* l_context)
 : BaseState(l_context), m_backgroundTexture(), m_backgroundSprite(), m_font("Arial.ttf"),
-m_gui_buttons(){
+m_gui_buttons(), m_selected_item(0){
     Logger::getInstance().log("MenuState::MenuState");
     m_shared_context->m_eventManager->registerCallback(StateType::Menu,
                                                        "arrowKeyUp",
@@ -30,6 +30,7 @@ m_gui_buttons(){
                                                        this);
 
     setupGUI();
+    m_font.setSmooth(false);
 }
 MenuState::~MenuState() {
     Logger::getInstance().log("MenuState::~MenuState");
@@ -66,12 +67,18 @@ void MenuState::update(float l_dt){
 void MenuState::draw(){
     m_shared_context->m_window->getRenderWindow()->draw(*m_backgroundSprite);
     for (auto& button : m_gui_buttons) {
-         button.draw(m_shared_context->m_window->getRenderWindow());
+         button->draw(m_shared_context->m_window->getRenderWindow());
     }
 }
 
 void MenuState::setupGUI() {
-    m_gui_buttons.emplace_back(Button(&m_font));
+    auto newGameButton = std::make_unique<Button>(&m_font);
+    newGameButton->setText("New Game");
+    newGameButton->setTextSize(10);
+    newGameButton->setTextFillColor(sf::Color::White);
+    m_gui_buttons.push_back(std::move(newGameButton));
+
+    m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::Red);
 }
 
 
