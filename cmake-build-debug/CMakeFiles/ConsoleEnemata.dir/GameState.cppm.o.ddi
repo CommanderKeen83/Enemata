@@ -1,0 +1,24 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/GameState.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "SharedState:GameState",
+          "source-path": "/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/GameState.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "SharedState:BaseState"
+        },
+        {
+          "logical-name": "SharedState:SharedContext"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,21 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/Button.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "SharedState:Button",
+          "source-path": "/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/Button.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "SharedState:Gui_Element"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

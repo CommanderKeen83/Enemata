@@ -1,0 +1,16 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/EventDetails.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "SharedState:EventDetails",
+          "source-path": "/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/EventDetails.cppm"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

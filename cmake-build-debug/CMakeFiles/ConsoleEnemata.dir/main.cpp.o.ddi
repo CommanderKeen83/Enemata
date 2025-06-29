@@ -1,0 +1,14 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/main.cpp.o",
+      "requires": [
+        {
+          "logical-name": "Game"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,3 @@
+/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/cmake-build-debug/CMakeFiles/ConsoleEnemata.dir
+/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,27 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/BaseState.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "SharedState:BaseState",
+          "source-path": "/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/BaseState.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "SharedState:SharedContext"
+        },
+        {
+          "logical-name": "SharedState:Window"
+        },
+        {
+          "logical-name": "Logger"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

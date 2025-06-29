@@ -1,0 +1,27 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/StateManager.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "SharedState:StateManager",
+          "source-path": "/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/StateManager.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "SharedState:BaseState"
+        },
+        {
+          "logical-name": "SharedState:Types"
+        },
+        {
+          "logical-name": "SharedState:SharedContext"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

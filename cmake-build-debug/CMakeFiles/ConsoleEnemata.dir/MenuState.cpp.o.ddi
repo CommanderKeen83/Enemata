@@ -1,0 +1,23 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/MenuState.cpp.o",
+      "requires": [
+        {
+          "logical-name": "Logger"
+        },
+        {
+          "logical-name": "Utils"
+        },
+        {
+          "logical-name": "SharedState:EventManager"
+        },
+        {
+          "logical-name": "SharedState"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

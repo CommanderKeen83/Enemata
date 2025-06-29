@@ -1,0 +1,94 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/ConsoleEnemata.dir/main.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/Game.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Window.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/EventManager.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm CMakeFiles/ConsoleEnemata.dir/Logger.pcm CMakeFiles/ConsoleEnemata.dir/Utils.pcm CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/StateManager.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-MenuState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-GameState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/MenuState.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/Logger.pcm CMakeFiles/ConsoleEnemata.dir/Utils.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventManager.pcm CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/GameState.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/Logger.pcm CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Gui_Manager.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Gui_Element.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Button.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Label.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Slider.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/TextBox.cpp.o: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+
+build CMakeFiles/ConsoleEnemata.dir/Window.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Window.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-EventManager.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventDetails.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Game.cppm.o | CMakeFiles/ConsoleEnemata.dir/Game.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/StateManager.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-StateManager.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-BaseState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/SharedState.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventType.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventInfo.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventDetails.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventBinding.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventManager.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-StateManager.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-BaseState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-MenuState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-GameState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Window.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-GuiManager.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Button.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Label.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Slider.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-TextBox.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Style.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/SharedContext.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Types.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/EventType.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-EventType.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/Utils.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/EventInfo.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-EventInfo.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/EventDetails.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-EventDetails.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/EventBinding.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-EventBinding.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-EventInfo.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventType.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventDetails.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/EventManager.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-EventManager.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-EventType.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventInfo.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventBinding.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventDetails.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Types.pcm CMakeFiles/ConsoleEnemata.dir/Utils.pcm CMakeFiles/ConsoleEnemata.dir/Logger.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/BaseState.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-BaseState.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-Window.pcm CMakeFiles/ConsoleEnemata.dir/Logger.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/MenuState.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-MenuState.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-BaseState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-EventDetails.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/GameState.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-GameState.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-BaseState.pcm CMakeFiles/ConsoleEnemata.dir/SharedState-SharedContext.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Utils.cppm.o | CMakeFiles/ConsoleEnemata.dir/Utils.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Logger.cppm.o | CMakeFiles/ConsoleEnemata.dir/Logger.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Gui_Manager.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-GuiManager.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Gui_Element.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Gui_Style.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Style.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Button.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Button.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Label.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Label.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/Slider.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-Slider.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm
+  restat = 1
+
+build CMakeFiles/ConsoleEnemata.dir/TextBox.cppm.o | CMakeFiles/ConsoleEnemata.dir/SharedState-TextBox.pcm: dyndep | CMakeFiles/ConsoleEnemata.dir/SharedState-Gui_Element.pcm
+  restat = 1
+

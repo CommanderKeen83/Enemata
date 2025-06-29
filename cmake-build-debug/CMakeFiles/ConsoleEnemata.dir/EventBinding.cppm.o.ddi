@@ -1,0 +1,27 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/EventBinding.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "SharedState:EventBinding",
+          "source-path": "/Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/EventBinding.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "SharedState:EventInfo"
+        },
+        {
+          "logical-name": "SharedState:EventType"
+        },
+        {
+          "logical-name": "SharedState:EventDetails"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

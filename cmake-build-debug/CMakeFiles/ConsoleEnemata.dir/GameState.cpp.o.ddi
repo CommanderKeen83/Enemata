@@ -1,0 +1,17 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/ConsoleEnemata.dir/GameState.cpp.o",
+      "requires": [
+        {
+          "logical-name": "Logger"
+        },
+        {
+          "logical-name": "SharedState"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

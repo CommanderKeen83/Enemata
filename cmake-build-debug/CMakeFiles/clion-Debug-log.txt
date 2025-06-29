@@ -1,0 +1,5 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++ -G Ninja -S /Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly -B /Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/cmake-build-debug
+-- Found SFML 3.1.0 in /usr/local/lib/cmake/SFML
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/sf/Library/CloudStorage/OneDrive-Personal/C++/absolutly/cmake-build-debug
