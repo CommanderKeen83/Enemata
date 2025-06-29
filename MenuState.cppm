@@ -5,6 +5,7 @@
 module;
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <vector>
 export module SharedState:MenuState;
 
@@ -28,8 +29,12 @@ private:
     virtual void update(float l_dt) override;
     virtual void draw() override;
 
+private:
+    void setupGUI();
+
     std::unique_ptr<sf::Texture> m_backgroundTexture;
     std::unique_ptr<sf::Sprite> m_backgroundSprite;
     std::vector<Button> m_gui_buttons;
+    sf::Font m_font;
 
 };

@@ -13,7 +13,8 @@ import Utils;
 import :EventManager;
 
 MenuState::MenuState(SharedContext* l_context)
-: BaseState(l_context), m_backgroundTexture(), m_backgroundSprite(){
+: BaseState(l_context), m_backgroundTexture(), m_backgroundSprite(), m_font("Arial.ttf"),
+m_gui_buttons(){
     Logger::getInstance().log("MenuState::MenuState");
     m_shared_context->m_eventManager->registerCallback(StateType::Menu,
                                                        "arrowKeyUp",
@@ -27,6 +28,8 @@ MenuState::MenuState(SharedContext* l_context)
                                                        "select",
                                                        &MenuState::select,
                                                        this);
+
+    setupGUI();
 }
 MenuState::~MenuState() {
     Logger::getInstance().log("MenuState::~MenuState");
@@ -62,7 +65,15 @@ void MenuState::update(float l_dt){
 
 void MenuState::draw(){
     m_shared_context->m_window->getRenderWindow()->draw(*m_backgroundSprite);
+    for (auto& button : m_gui_buttons) {
+         button.draw(m_shared_context->m_window->getRenderWindow());
+    }
 }
+
+void MenuState::setupGUI() {
+    m_gui_buttons.emplace_back(Button(&m_font));
+}
+
 
 void MenuState::keyArrowUp(EventDetails* l_details){
     Logger::getInstance().log("MenuState::keyArrowUp");

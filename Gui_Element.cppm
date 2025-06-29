@@ -14,7 +14,15 @@ export module SharedState:Gui_Element;
 // Base Class for Gui
 export class Gui_Element{
 public:
-    Gui_Element();
+    Gui_Element() = default;
+    // Delete copy constructor and copy assignment
+    Gui_Element(const Gui_Element&) = delete;
+    Gui_Element& operator=(const Gui_Element&) = delete;
+
+    // Default move constructor and move assignment
+    Gui_Element(Gui_Element&&) = default;
+    Gui_Element& operator=(Gui_Element&&) = default;
+
     virtual ~Gui_Element() = default;
     virtual void read_in(std::stringstream& l_ss) = 0;
     virtual void on_click(const sf::Vector2f& l_mousePos) = 0;

@@ -6,13 +6,14 @@ module;
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <sstream>
 #include <functional>
 module SharedState;
 
 
-Button::Button(sf::Vector2f l_size)
-: m_font(nullptr), m_text(*m_font)
+Button::Button(sf::Font* l_font)
+    : m_text(*l_font)
 {}
 
 void Button::read_in(std::stringstream& l_ss) { }
@@ -21,17 +22,24 @@ bool Button::handleEvent(const sf::Event& l_event) {
     return false;
 }
 void Button::update(const float& l_dt) { }
-void Button::draw(sf::RenderTarget* l_render_target) { }
-std::string Button::getText() const {
-    return m_text.getString();
+void Button::draw(sf::RenderTarget* l_render_target) {
+    l_render_target->draw(m_text);
 }
-void Button::setText(const std::string_view l_text) {
-    m_text.setString(std::string(l_text));
-}
+// std::string Button::getText() const {
+//     return m_text.getString();
+// }
+void Button::on_release() {}
+void Button::on_hover(const sf::Vector2f& l_mousePos) {}
+void Button::on_leave() {}
+
+
+// void Button::setText(const std::string_view l_text) {
+//     m_text.setString(std::string(l_text));
+// }
 
 void Button::setTextColor(const sf::Color l_color){}
 void Button::setTextSize(const int l_textSize) {
-    m_text.setCharacterSize(std::max(1, l_textSize));
+//    m_text.setCharacterSize(std::max(1, l_textSize));
 }
 void Button::setCallback(std::function<void()>& l_callback) {
     m_callback = l_callback;
