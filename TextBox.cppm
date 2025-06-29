@@ -6,6 +6,8 @@ module;
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <sstream>
 
 export module SharedState:TextBox;
@@ -18,4 +20,12 @@ public:
     virtual bool handleEvent(const sf::Event& l_event) override;
     virtual void update(const float& l_dt) override;
     virtual void draw(sf::RenderTarget* l_render_target) override;
+
+    // custom methods for Label
+    std::string getText() const;
+    void setMaxLength(int l_length);
+private:
+    sf::Font* m_font;
+    sf::Text m_text;
+    unsigned int m_max_length;
 };

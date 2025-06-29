@@ -26,7 +26,7 @@ std::string Button::getText() const {
     return m_text.getString();
 }
 void Button::setText(const std::string_view l_text) {
-    m_text.setString(l_text);
+    m_text.setString(std::string(l_text));
 }
 
 void Button::setTextColor(const sf::Color l_color){}

@@ -9,7 +9,7 @@ module;
 
 module SharedState;
 Label::Label(sf::Vector2f l_size)
-    : Gui_Element() {
+    : m_font(nullptr), m_text(*m_font) {
 }
 void Label::read_in(std::stringstream& l_ss) { }
 void Label::on_click(const sf::Vector2f& l_mousePos) { }
@@ -18,3 +18,12 @@ bool Label::handleEvent(const sf::Event& l_event) {
 }
 void Label::update(const float& l_dt) { }
 void Label::draw(sf::RenderTarget* l_render_target) { }
+
+void Label::setText(const std::string_view l_text) {
+    m_text.setString(std::string(l_text));
+}
+
+void Label::setTextColor(const sf::Color l_color){}
+void Label::setTextSize(const int l_textSize) {
+    m_text.setCharacterSize(std::max(1, l_textSize));
+}

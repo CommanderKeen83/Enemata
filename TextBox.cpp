@@ -9,9 +9,10 @@ module;
 #include <sstream>
 module SharedState;
 
+import Logger;
 
 TextBox::TextBox(sf::Vector2f l_size)
-: Gui_Element()
+: m_font(nullptr), m_text(*m_font), m_max_length(0)
 {}
 
 void TextBox::read_in(std::stringstream& l_ss) { }
@@ -21,3 +22,10 @@ bool TextBox::handleEvent(const sf::Event& l_event) {
 }
 void TextBox::update(const float& l_dt) { }
 void TextBox::draw(sf::RenderTarget* l_render_target) { }
+
+std::string TextBox::getText() const{
+    return m_text.getString();
+}
+void TextBox::setMaxLength(int l_length){
+    m_max_length = std::max(0, l_length);
+}
