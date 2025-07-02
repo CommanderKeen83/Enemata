@@ -13,6 +13,7 @@ import :SharedContext;
 export class GameState : public BaseState{
 public:
     explicit GameState(SharedContext* l_context);
+    ~GameState() override;
 
 private:
     void on_create() override;

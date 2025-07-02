@@ -2,6 +2,8 @@
 // Created by CommanderKeen on 15.12.24.
 //
 module;
+
+#include <print>
 #include <functional>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -11,11 +13,12 @@ module SharedState;
 
 import Logger;
 import Utils;
-import :EventManager;
+
 
 MenuState::MenuState(SharedContext* l_context)
 : BaseState(l_context), m_backgroundTexture(), m_backgroundSprite(), m_font("Arial.ttf"),
 m_gui_buttons(), m_selected_item(0){
+    std::println("MenuState::MenuState");
     Logger::getInstance().log("MenuState::MenuState");
     m_shared_context->m_eventManager->registerCallback(StateType::Menu,
                                                        "arrowKeyUp",
@@ -34,12 +37,14 @@ m_gui_buttons(), m_selected_item(0){
     m_font.setSmooth(false);
 }
 MenuState::~MenuState() {
+    std::println("MenuState::~MenuState");
     Logger::getInstance().log("MenuState::~MenuState");
-    m_shared_context->m_eventManager->removeCallback(StateType::Menu, "arrowKeyUp");
-    m_shared_context->m_eventManager->removeCallback(StateType::Menu, "arrowKeyDown");
+    //m_shared_context->m_eventManager->removeCallback(StateType::Menu, "arrowKeyUp");
+    //m_shared_context->m_eventManager->removeCallback(StateType::Menu, "arrowKeyDown");
 }
 
 void MenuState::on_create() {
+    std::println("MenuState::onCreate");
     Logger::getInstance().log("MenuState::on_create()");
     std::string filePath = Utils::get_project_path() + "/resources/graphics/main_menu.png";
     m_backgroundTexture = std::make_unique<sf::Texture>();
@@ -51,13 +56,17 @@ void MenuState::on_create() {
                       sf::Vector2f{float(m_backgroundTexture->getSize().x), float(m_backgroundTexture->getSize().y)}};
 }
 void MenuState::on_activate() {
+    std::println("MenuState::onActivate");
     Logger::getInstance().log("MenuState::on_activate()");
+    m_shared_context->m_stateManager->print_states_to_console();
 }
 void MenuState::on_deactivate(){
+    std::println("MenuState::onDeactivate");
     Logger::getInstance().log("MenuState::on_deactivate()");
 }
 //TODO: on_destroy isn't invoked anywhere yet
 void MenuState::on_destroy() {
+    std::println("MenuState::onDestroy");
     Logger::getInstance().log("MenuState::on_destroy()");
 }
 
@@ -99,7 +108,8 @@ void MenuState::setupGUI() {
     m_gui_buttons[m_selected_item]->setTextFillColor(sf::Color::Red);
 }
 void MenuState::quitGame() {
-    m_shared_context->m_stateManager->switch_state(StateType::Exit);
+    m_shared_context->m_stateManager->switch_state(StateType::Quit);
+//    m_shared_context->m_stateManager->remove_state(StateType::Menu);
 }
 void MenuState::startGame() {
     m_shared_context->m_stateManager->switch_state(StateType::Game);

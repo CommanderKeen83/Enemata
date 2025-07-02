@@ -1,0 +1,308 @@
+// GUI_Element.h - Updated base class
+#pragma once
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <memory>
+
+class GUI_Element : public sf::Transformable {
+protected:
+    sf::Vector2f m_size;
+    GUI_Element* m_parent;
+    std::vector<std::unique_ptr<GUI_Element>> m_children;
+
+public:
+    GUI_Element(float x = 0.0f, float y = 0.0f, float width = 0.0f, float height = 0.0f)
+        : m_size(width, height), m_parent(nullptr) {
+        setPosition(x, y);
+    }
+
+    virtual ~GUI_Element() = default;
+
+    // Transform management
+    sf::Transform getWorldTransform() const {
+        if (m_parent) {
+            return m_parent->getWorldTransform() * getTransform();
+        }
+        return getTransform();
+    }
+
+    sf::Vector2f getWorldPosition() const {
+        return getWorldTransform().transformPoint(0, 0);
+    }
+
+    // Child management
+    void addChild(std::unique_ptr<GUI_Element> child) {
+        if (child) {
+            child->m_parent = this;
+            m_children.push_back(std::move(child));
+        }
+    }
+
+    void removeChild(GUI_Element* child) {
+        auto it = std::find_if(m_children.begin(), m_children.end(),
+            [child](const std::unique_ptr<GUI_Element>& ptr) {
+                return ptr.get() == child;
+            });
+
+        if (it != m_children.end()) {
+            (*it)->m_parent = nullptr;
+            m_children.erase(it);
+        }
+    }
+
+    void clearChildren() {
+        for (auto& child : m_children) {
+            child->m_parent = nullptr;
+        }
+        m_children.clear();
+    }
+
+    // Size management
+    void setSize(float width, float height) { m_size = sf::Vector2f(width, height); }
+    void setSize(const sf::Vector2f& size) { m_size = size; }
+    sf::Vector2f getSize() const { return m_size; }
+    float getWidth() const { return m_size.x; }
+    float getHeight() const { return m_size.y; }
+
+    // Virtual methods
+    virtual void update(float deltaTime) {
+        for (auto& child : m_children) {
+            child->update(deltaTime);
+        }
+    }
+
+    virtual void render(sf::RenderTarget& target, const sf::Transform& parentTransform = sf::Transform::Identity) {
+        sf::Transform combinedTransform = parentTransform * getTransform();
+
+        // Render this element
+        onRender(target, combinedTransform);
+
+        // Render children with combined transform
+        for (auto& child : m_children) {
+            child->render(target, combinedTransform);
+        }
+    }
+
+    virtual void handleEvent(const sf::Event& event, const sf::Transform& parentTransform = sf::Transform::Identity) {
+        sf::Transform combinedTransform = parentTransform * getTransform();
+
+        // Handle this element's events
+        onHandleEvent(event, combinedTransform);
+
+        // Pass to children
+        for (auto& child : m_children) {
+            child->handleEvent(event, combinedTransform);
+        }
+    }
+
+protected:
+    // Override these in derived classes
+    virtual void onRender(sf::RenderTarget& target, const sf::Transform& transform) {}
+    virtual void onHandleEvent(const sf::Event& event, const sf::Transform& transform) {}
+
+    // Helper for hit testing with transforms
+    bool isPointInside(const sf::Vector2f& point, const sf::Transform& transform) const {
+        sf::Vector2f localPoint = transform.getInverse().transformPoint(point);
+        return localPoint.x >= 0 && localPoint.x <= m_size.x &&
+               localPoint.y >= 0 && localPoint.y <= m_size.y;
+    }
+};
+
+// Button.h - Updated to work with transforms
+class Button : public GUI_Element {
+private:
+    sf::RectangleShape m_shape;
+    sf::Text m_text;
+    sf::Font* m_font;
+    bool m_isHovered;
+    bool m_isPressed;
+    std::function<void()> m_callback;
+
+public:
+    Button(const std::string& text, float x = 0, float y = 0, float width = 150, float height = 50)
+        : GUI_Element(x, y, width, height), m_isHovered(false), m_isPressed(false) {
+
+        m_shape.setSize(sf::Vector2f(width, height));
+        m_shape.setFillColor(sf::Color(100, 100, 100));
+        m_shape.setOutlineThickness(2);
+        m_shape.setOutlineColor(sf::Color::White);
+
+        // Note: You'll need to set the font externally or pass it in constructor
+        m_text.setString(text);
+        m_text.setCharacterSize(16);
+        m_text.setFillColor(sf::Color::White);
+
+        // Center text in button
+        centerText();
+    }
+
+    void setFont(sf::Font& font) {
+        m_font = &font;
+        m_text.setFont(font);
+        centerText();
+    }
+
+    void setCallback(std::function<void()> callback) {
+        m_callback = callback;
+    }
+
+protected:
+    void onRender(sf::RenderTarget& target, const sf::Transform& transform) override {
+        // Apply transform to shape and text
+        sf::RenderStates states;
+        states.transform = transform;
+
+        target.draw(m_shape, states);
+        target.draw(m_text, states);
+    }
+
+    void onHandleEvent(const sf::Event& event, const sf::Transform& transform) override {
+        if (event.type == sf::Event::MouseMoved) {
+            sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
+            m_isHovered = isPointInside(mousePos, transform);
+
+            // Update visual state
+            if (m_isHovered) {
+                m_shape.setFillColor(sf::Color(150, 150, 150));
+            } else {
+                m_shape.setFillColor(sf::Color(100, 100, 100));
+            }
+        }
+        else if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                if (isPointInside(mousePos, transform)) {
+                    m_isPressed = true;
+                    m_shape.setFillColor(sf::Color(50, 50, 50));
+                }
+            }
+        }
+        else if (event.type == sf::Event::MouseButtonReleased) {
+            if (event.mouseButton.button == sf::Mouse::Left && m_isPressed) {
+                sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                if (isPointInside(mousePos, transform) && m_callback) {
+                    m_callback();
+                }
+                m_isPressed = false;
+                m_shape.setFillColor(m_isHovered ? sf::Color(150, 150, 150) : sf::Color(100, 100, 100));
+            }
+        }
+    }
+
+private:
+    void centerText() {
+        if (m_font) {
+            sf::FloatRect textBounds = m_text.getLocalBounds();
+            sf::Vector2f buttonSize = getSize();
+
+            m_text.setPosition(
+                (buttonSize.x - textBounds.width) / 2.0f - textBounds.left,
+                (buttonSize.y - textBounds.height) / 2.0f - textBounds.top
+            );
+        }
+    }
+};
+
+// GUI_Container.h - Simplified container using transforms
+class GUI_Container : public GUI_Element {
+private:
+    sf::RectangleShape m_background;
+    bool m_drawBackground;
+
+public:
+    GUI_Container(float x = 0.0f, float y = 0.0f, float width = 0.0f, float height = 0.0f)
+        : GUI_Element(x, y, width, height), m_drawBackground(false) {
+
+        m_background.setSize(sf::Vector2f(width, height));
+        m_background.setFillColor(sf::Color(50, 50, 50, 100)); // Semi-transparent
+        m_background.setOutlineThickness(1);
+        m_background.setOutlineColor(sf::Color(100, 100, 100));
+    }
+
+    void setBackgroundVisible(bool visible) { m_drawBackground = visible; }
+    void setBackgroundColor(const sf::Color& color) { m_background.setFillColor(color); }
+
+protected:
+    void onRender(sf::RenderTarget& target, const sf::Transform& transform) override {
+        if (m_drawBackground) {
+            sf::RenderStates states;
+            states.transform = transform;
+            target.draw(m_background, states);
+        }
+    }
+};
+
+// Updated MainMenu class usage
+class MainMenu : public BaseState {
+private:
+    sf::Font m_font;
+    std::unique_ptr<GUI_Container> m_rootContainer;
+    std::unique_ptr<GUI_Container> m_buttonContainer;
+
+    // Keep raw pointers for easy access
+    Button* m_continueButton;
+    Button* m_loadGameButton;
+    Button* m_optionsButton;
+    Button* m_quitButton;
+
+public:
+    MainMenu() {
+        // Load font
+        if (!m_font.loadFromFile("assets/fonts/arial.ttf")) {
+            // Handle font loading error
+        }
+
+        // Create root container
+        m_rootContainer = std::make_unique<GUI_Container>(0, 0, 800, 600);
+
+        // Create button container at specific position
+        auto buttonContainer = std::make_unique<GUI_Container>(0, 0, 300, 400);
+        buttonContainer->setPosition(250, 200); // Center horizontally
+        buttonContainer->setBackgroundVisible(true);
+
+        // Create buttons with LOCAL positions relative to container
+        auto continueBtn = std::make_unique<Button>("Continue", 50, 50, 200, 50);
+        auto loadBtn = std::make_unique<Button>("Load Game", 50, 120, 200, 50);
+        auto optionsBtn = std::make_unique<Button>("Options", 50, 190, 200, 50);
+        auto quitBtn = std::make_unique<Button>("Quit", 50, 260, 200, 50);
+
+        // Set fonts and callbacks
+        continueBtn->setFont(m_font);
+        loadBtn->setFont(m_font);
+        optionsBtn->setFont(m_font);
+        quitBtn->setFont(m_font);
+
+        // Store raw pointers
+        m_continueButton = continueBtn.get();
+        m_loadGameButton = loadBtn.get();
+        m_optionsButton = optionsBtn.get();
+        m_quitButton = quitBtn.get();
+
+        // Add buttons to container
+        buttonContainer->addChild(std::move(continueBtn));
+        buttonContainer->addChild(std::move(loadBtn));
+        buttonContainer->addChild(std::move(optionsBtn));
+        buttonContainer->addChild(std::move(quitBtn));
+
+        // Store container reference and add to root
+        m_buttonContainer = buttonContainer.get();
+        m_rootContainer->addChild(std::move(buttonContainer));
+
+        // Now you can easily move the entire button group:
+        // m_buttonContainer->setPosition(100, 150);
+        // m_buttonContainer->setRotation(10); // Even rotate the whole group!
+        // m_buttonContainer->setScale(1.2f, 1.2f); // Scale the whole group!
+    }
+
+    void update(float deltaTime) override {
+        m_rootContainer->update(deltaTime);
+    }
+
+    void render(sf::RenderWindow& window) override {
+        m_rootContainer->render(window);
+    }
+
+    void handleEvent(const sf::Event& event) override {
+        m_rootContainer->handleEvent(event);
+    }
+};

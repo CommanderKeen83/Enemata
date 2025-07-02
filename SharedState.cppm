@@ -16,6 +16,7 @@ export import :StateManager;
 export import :BaseState;
 export import :MenuState;
 export import :GameState;
+export import :QuitState;
 
 export import :Window;
 

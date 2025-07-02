@@ -9,6 +9,7 @@ module;
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <print>
 #include <SFML/Window/Event.hpp>
 
 module SharedState;

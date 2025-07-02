@@ -2,7 +2,9 @@
 // Created by CommanderKeen on 06.10.24.
 //
 module;
-
+#include <print>
+#include <optional>
+#include <string>
 export module Game;
 
 import SharedState;
@@ -17,9 +19,11 @@ public:
         m_sharedContext.m_guiManager = &m_guiManager;
 
         m_stateManager.switch_state(StateType::Menu);
+        m_stateManager.late_update();
     }
     ~Game() = default;
     void run(){
+
         while(m_window.isOpen() && m_stateManager.has_states()) {
             update(1.f / 60.f);
             render();

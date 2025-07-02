@@ -14,6 +14,7 @@ set(SOURCES main.cpp
         Label.cpp
         Slider.cpp
         TextBox.cpp
+        QuitState.cpp
 
 )
 
@@ -54,6 +55,7 @@ target_sources(ConsoleEnemata
         BaseState.cppm
         MenuState.cppm
         GameState.cppm
+        QuitState.cppm
         Utils.cppm
         Logger.cppm
         Gui_Manager.cppm
