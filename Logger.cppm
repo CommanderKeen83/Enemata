@@ -31,3 +31,4 @@ private:
     }
     std::ofstream m_file;
 };
+

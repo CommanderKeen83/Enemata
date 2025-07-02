@@ -46,7 +46,7 @@ void Button::setText(const std::string_view l_text) {
     m_text.setString(std::string(l_text));
 }
 
-void Button::setTextFillColor(const sf::Color l_color) {
+void Button::set_text_fill_color(const sf::Color l_color) {
     m_text.setFillColor(l_color);
 }
 void Button::setTextSize(const int l_textSize) {

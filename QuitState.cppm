@@ -1,11 +1,18 @@
 //
 // Created by SF on 01.07.25.
-//
+
+module;
+#include <vector>
+#include <memory>
+#include <SFML/Graphics/Font.hpp>
 
 export module SharedState:QuitState;
 
 import :SharedContext;
 import :BaseState;
+import :Button;
+import :Gui_Element;
+import :Label;
 
 export class QuitState : public BaseState{
 public:
@@ -20,6 +27,16 @@ private:
 
         virtual void update(float l_dt) override;
         virtual void draw() override;
+        void setupGui();
+
+    void keyArrowUp(EventDetails* l_details);
+    void keyArrowDown(EventDetails* l_details);
+    void select(EventDetails* l_details = nullptr);
+
+    std::unique_ptr<Label>                  m_label;
+    std::vector<std::unique_ptr<Button>>    m_buttons;
+    sf::Font m_font;
+    int m_selected_button = 0; // Label sits on position 0 in m_gui_elements
 };
 
 

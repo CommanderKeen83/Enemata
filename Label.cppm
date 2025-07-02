@@ -4,6 +4,7 @@
 module;
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -12,12 +13,15 @@ export module SharedState:Label;
 import :Gui_Element;
 export class Label : public Gui_Element {
 public:
-    Label(sf::Vector2f l_size = {100, 60});
-    virtual void read_in(std::stringstream& l_ss) override;
-    virtual void on_click(const sf::Vector2f& l_mousePos) override;
-    virtual bool handleEvent(const sf::Event& l_event) override;
-    virtual void update(const float& l_dt) override;
-    virtual void draw(sf::RenderTarget* l_render_target) override;
+    Label(sf::Font* l_font = nullptr);
+    void read_in(std::stringstream& l_ss) override;
+    void on_click(const sf::Vector2f& l_mousePos) override;
+    bool handleEvent(const sf::Event& l_event) override;
+    void update(const float& l_dt) override;
+    void draw(sf::RenderTarget* l_render_target) override;
+    void on_release() override;
+    void on_hover(const sf::Vector2f& l_mousePos) override;
+    void on_leave() override;
 
     // custom methods for Label
     void setText(const std::string_view l_text);

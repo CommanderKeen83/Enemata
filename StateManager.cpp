@@ -117,14 +117,14 @@ void StateManager::remove_state(StateType l_state){
 }
 
 void StateManager::late_update() {
-    for(auto& command : m_commands){
-        switch (command.first){
+    for(auto i = 0; i < m_commands.size(); ++i){
+        switch (m_commands[i].first){
             case Command::SwitchTo: {
-                switch_to(command.second);
+                switch_to(m_commands[i].second);
                 break;
             }
             case Command::Remove: {
-                erase_state(command.second);
+                erase_state(m_commands[i].second);
                 break;
             }
             case Command::ClearAll: {
@@ -137,11 +137,6 @@ void StateManager::late_update() {
         }
     }
     m_commands.clear();
-
-    while(m_to_be_removed_states.begin() != m_to_be_removed_states.end()){
-        erase_state(*m_to_be_removed_states.begin());
-        m_to_be_removed_states.erase(m_to_be_removed_states.begin());
-    }
 }
 void StateManager::erase_state(StateType l_state){
     std::erase_if(m_states, [l_state](auto& pair){
