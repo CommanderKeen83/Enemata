@@ -52,7 +52,7 @@ public:
     }
 private:
     void erase_state(StateType l_state);
-    void StateManager::switch_to(StateType l_new_state);
+    void switch_to(StateType l_new_state);
     void create_state(StateType l_new_state);
 
 

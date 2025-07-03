@@ -132,5 +132,4 @@ void MenuState::keyArrowDown(EventDetails* l_details){
 void MenuState::select(EventDetails* l_details){
     Logger::getInstance().log("MenuState::select");
     m_gui_buttons[m_selected_item]->on_click();
-
 }

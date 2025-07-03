@@ -16,19 +16,20 @@ QuitState::QuitState(SharedContext* l_context)
     : BaseState(l_context), m_font("Arial.ttf"){
     Logger::getInstance().log("QuitState::QuitState");
     m_shared_context->m_eventManager->registerCallback(StateType::Quit,
-                                                       "arrowKeyUp",
-                                                       &QuitState::keyArrowUp,
+                                                       "arrow_key_left",
+                                                       &QuitState::arrow_key_left,
                                                        this);
     m_shared_context->m_eventManager->registerCallback(StateType::Quit,
-                                                       "arrowKeyDown",
-                                                       &QuitState::keyArrowDown,
+                                                       "arrow_key_right",
+                                                       &QuitState::arrow_key_right,
                                                        this);
     m_shared_context->m_eventManager->registerCallback(StateType::Quit,
                                                        "select",
                                                        &QuitState::select,
                                                        this);
 
-
+    m_is_transparent = true;
+    m_is_transcendent = false;
     setupGui();
 }
 QuitState::~QuitState() {
@@ -41,6 +42,7 @@ void QuitState::on_create() {
 
 void QuitState::on_activate() {
     Logger::getInstance().log("QuitState::on_activate");
+    m_shared_context->m_stateManager->print_states_to_console();
 
 }
 void QuitState::on_deactivate()  {
@@ -74,12 +76,15 @@ void QuitState::setupGui(){
     std::unique_ptr<Button> button2 = std::make_unique<Button>(&m_font);
     button2->setText("No");
     button2->setPosition({60.f, 25.f});
+    button2->setCallback([this]() {
+        m_shared_context->m_stateManager->switch_state(StateType::Menu);
+    });
     m_buttons.emplace_back(std::move(button1));
     m_buttons.emplace_back(std::move(button2));
 
 }
 
-void QuitState::keyArrowUp(EventDetails* l_details){
+void QuitState::arrow_key_left(EventDetails* l_details){
     Logger::getInstance().log("QuitState::keyArrowUp");
 
     m_buttons[m_selected_button]->set_text_fill_color(sf::Color::White);
@@ -89,7 +94,7 @@ void QuitState::keyArrowUp(EventDetails* l_details){
     m_buttons[m_selected_button]->set_text_fill_color(sf::Color::Red);
 }
 
-void QuitState::keyArrowDown(EventDetails* l_details){
+void QuitState::arrow_key_right(EventDetails* l_details){
     Logger::getInstance().log("QuitState::keyArrowDown");
 
     m_buttons[m_selected_button]->set_text_fill_color(sf::Color::White);

@@ -29,8 +29,8 @@ private:
         virtual void draw() override;
         void setupGui();
 
-    void keyArrowUp(EventDetails* l_details);
-    void keyArrowDown(EventDetails* l_details);
+    void arrow_key_left(EventDetails* l_details);
+    void arrow_key_right(EventDetails* l_details);
     void select(EventDetails* l_details = nullptr);
 
     std::unique_ptr<Label>                  m_label;
