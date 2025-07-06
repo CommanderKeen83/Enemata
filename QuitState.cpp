@@ -3,7 +3,6 @@
 //
 
 module;
-#include <print>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Color.hpp>
 
@@ -103,5 +102,6 @@ void QuitState::arrow_key_right(EventDetails* l_details){
 
 }
 void QuitState::select(EventDetails* l_details){
+    Logger::getInstance().log("QuitState::select");
     m_buttons[m_selected_button]->on_click();
 }

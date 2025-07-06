@@ -15,8 +15,6 @@ set(SOURCES main.cpp
         Slider.cpp
         TextBox.cpp
         QuitState.cpp
-        ResourceManager.cpp
-        TextureManager.cpp
 
 )
 
