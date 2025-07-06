@@ -26,17 +26,22 @@ class ResourceManager {
         T t;
         return t;
     }
-    void loadResource(const std::string_view l_id) {
-        const std::string resourcePath = get_resource_path(l_id);
-        std::unique_ptr<T> resource = load(resourcePath);
+    void loadResource(const std::string& l_id) {
+        if (auto resourcePath = get_resource_path(l_id)) {
+            std::unique_ptr<T> resource = load(*resourcePath);
+        }
     }
 protected:
-    std::unique_ptr<T> load(const std::string_view l_id) {
+    std::unique_ptr<T> load(const std::string& l_id) {
         auto resource = dynamic_cast<DERIVED*>(this)->load(l_id);
         return resource;
     }
-    std::string get_resource_path(const std::string_view l_id) {
-        return std::string{};
+    std::optional<std::string> get_resource_path(const std::string& l_id) {
+        auto found = m_resource_paths.find(l_id);
+        if (found == m_resource_paths.end()) {
+            return std::nullopt;
+        }
+        return found->second;
     }
 
 private:
