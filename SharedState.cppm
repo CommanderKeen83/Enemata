@@ -29,3 +29,5 @@ export import :Label;
 export import :Slider;
 export import :TextBox;
 export import :Gui_Style;
+export import :ResourceManager;
+export import :TextureManager;

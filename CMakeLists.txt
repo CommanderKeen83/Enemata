@@ -15,6 +15,8 @@ set(SOURCES main.cpp
         Slider.cpp
         TextBox.cpp
         QuitState.cpp
+        ResourceManager.cpp
+        TextureManager.cpp
 
 )
 
@@ -65,7 +67,8 @@ target_sources(ConsoleEnemata
         Label.cppm
         Slider.cppm
         TextBox.cppm
-
+        ResourceManager.cppm
+        TextureManager.cppm
 )
 
 # Link external libraries

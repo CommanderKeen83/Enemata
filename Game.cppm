@@ -5,6 +5,7 @@ module;
 #include <print>
 #include <optional>
 #include <string>
+#include <SFML/Graphics/Texture.hpp>
 export module Game;
 
 import SharedState;
@@ -20,6 +21,7 @@ public:
 
         m_stateManager.switch_state(StateType::Menu);
         m_stateManager.late_update();
+        m_textureManager.loadResource("br");
     }
     ~Game() = default;
     void run(){
@@ -47,5 +49,6 @@ private:
     SharedContext m_sharedContext;
     StateManager m_stateManager;
     Gui_Manager m_guiManager;
+    TextureManager m_textureManager;
 
 };
