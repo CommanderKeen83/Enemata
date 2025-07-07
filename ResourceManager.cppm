@@ -8,6 +8,7 @@ module;
 #include <fstream>
 #include <sstream>
 #include <functional>
+#include <optional>
 export module SharedState:ResourceManager;
 
 import Logger;
@@ -28,13 +29,23 @@ class ResourceManager {
     ResourceManager(ResourceManager&&) = delete;
     ResourceManager& operator=(ResourceManager&&) = delete;
 
-    T& get(const std::string& l_id) {
-        T t;
-        return t;
+    T* get(const std::string& l_id) {
+        auto found_resource = m_resources.find(l_id);
+        if(!found_resource == m_resources.end()){
+            //something found
+            found_resource->second.second++;
+            Logger::getInstance().log("returning object " + l_id +
+                                      "; called in total: " +std::to_string(found_resource->second.second));
+            return found_resource->second.get();
+
+        }
     }
     void loadResource(const std::string& l_id) {
         if (auto resourcePath = get_resource_path(l_id)) {
             std::unique_ptr<T> resource = load(*resourcePath);
+        }else{
+            Logger::getInstance().log("Error in ResourceManager::loadResource: could not load " + l_id);
+            throw std::runtime_error("Error in ResourceManager::loadResource: could not load " + l_id);
         }
     }
 protected:
@@ -51,7 +62,7 @@ protected:
     }
 
 private:
-    void load_resource_path_pairs(const std::string_view l_id) {
+    void load_resource_path_pairs(const std::string& l_id) {
         std::ifstream ff;
         ff.open(l_id);
         if (!ff.is_open()) {
@@ -66,6 +77,7 @@ private:
             std::string first{};
             std::string second{};
             ss >> first >> second;
+            Logger::getInstance().log("ResourceManager::load_resource_path_pairs: id: " + first + " path: " + second);
             m_resource_paths.emplace(first, second);
         }
         ff.close();

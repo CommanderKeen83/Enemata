@@ -18,6 +18,7 @@ export struct SharedContext{
     EventManager* m_eventManager = nullptr;
     StateManager* m_stateManager = nullptr;
     Gui_Manager* m_guiManager = nullptr;
+    TextureManager* m_textureManager = nullptr;
 };
 
 

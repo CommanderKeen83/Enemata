@@ -19,6 +19,7 @@ MenuState::MenuState(SharedContext* l_context)
 : BaseState(l_context), m_backgroundTexture(), m_backgroundSprite(), m_font("Arial.ttf"),
 m_gui_buttons(), m_selected_item(0){
     Logger::getInstance().log("MenuState::MenuState");
+    m_shared_context->m_textureManager->loadResource("main_menu_background");
     m_shared_context->m_eventManager->registerCallback(StateType::Menu,
                                                        "arrowKeyUp",
                                                        &MenuState::keyArrowUp,

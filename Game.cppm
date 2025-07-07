@@ -18,10 +18,10 @@ public:
         m_sharedContext.m_stateManager = &m_stateManager;
         m_sharedContext.m_eventManager = m_window.getEventManager();
         m_sharedContext.m_guiManager = &m_guiManager;
+        m_sharedContext.m_textureManager = &m_textureManager;
 
         m_stateManager.switch_state(StateType::Menu);
         m_stateManager.late_update();
-        m_textureManager.loadResource("br");
     }
     ~Game() = default;
     void run(){
