@@ -13,6 +13,7 @@ import :BaseState;
 import :Button;
 import :Gui_Element;
 import :Label;
+import :Gui_Container;
 
 export class QuitState : public BaseState{
 public:
@@ -33,10 +34,11 @@ private:
     void arrow_key_right(EventDetails* l_details);
     void select(EventDetails* l_details = nullptr);
 
+    std::unique_ptr<Gui_Container>          m_gui_container;
     std::unique_ptr<Label>                  m_label;
-    std::vector<std::unique_ptr<Button>>    m_buttons;
-    sf::Font m_font;
-    int m_selected_button = 0; // Label sits on position 0 in m_gui_elements
+//    std::vector<std::unique_ptr<Button>>    m_buttons;
+    sf::Font                                m_font;
+    int                                     m_selected_button = 0; // Label sits on position 0 in m_gui_elements
 };
 
 

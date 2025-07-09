@@ -25,11 +25,12 @@ public:
     void on_click();
     bool handleEvent(const sf::Event& l_event) override;
     void update(const float& l_dt) override;
-    void draw(sf::RenderTarget* l_render_target) override;
-    void setPosition(const sf::Vector2f l_position) override;
+    void on_render(sf::RenderTarget* l_render_target, const sf::Transform& l_transform) override;
+    void setPosition(const sf::Vector2f l_position);
     void on_release() override;
     void on_hover(const sf::Vector2f& l_mousePos) override;
     void on_leave() override;
+    void set_selected(bool l_selected) override;
 
     // custom methods for Button
    void setText(const std::string_view l_text);

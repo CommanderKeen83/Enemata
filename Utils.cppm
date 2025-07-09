@@ -50,6 +50,7 @@ export namespace Utils {
             std::string subStr{currentPath};
             subStr = subStr.substr(0, subStr.find_last_of('/'));
             result = subStr;
+            result.append("/");
         }
         else {
             throw std::runtime_error("Error in Utils::get_project_path() - could not retrieve working path!");

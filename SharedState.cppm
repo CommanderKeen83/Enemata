@@ -24,6 +24,7 @@ export import :Types;
 
 export import :GuiManager;
 export import :Gui_Element;
+export import :Gui_Container;
 export import :Button;
 export import :Label;
 export import :Slider;

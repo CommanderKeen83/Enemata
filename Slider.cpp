@@ -17,4 +17,4 @@ bool Slider::handleEvent(const sf::Event& l_event) {
     return false;
 }
 void Slider::update(const float& l_dt) { }
-void Slider::draw(sf::RenderTarget* l_render_target) { }
+void Slider::on_render(sf::RenderTarget* l_render_target, const sf::Transform& l_transform)  { }

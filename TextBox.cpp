@@ -21,7 +21,7 @@ bool TextBox::handleEvent(const sf::Event& l_event) {
     return false;
 }
 void TextBox::update(const float& l_dt) { }
-void TextBox::draw(sf::RenderTarget* l_render_target) { }
+void TextBox::on_render(sf::RenderTarget* l_render_target, const sf::Transform& l_transform) { }
 
 std::string TextBox::getText() const{
     return m_text.getString();

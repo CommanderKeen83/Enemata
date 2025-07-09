@@ -16,9 +16,9 @@ import Utils;
 
 
 MenuState::MenuState(SharedContext* l_context)
-: BaseState(l_context), m_backgroundTexture(), m_backgroundSprite(), m_font("Arial.ttf"),
-m_gui_buttons(), m_selected_item(0){
+: BaseState(l_context), m_font("Arial.ttf"), m_selected_item(0){
     Logger::getInstance().log("MenuState::MenuState");
+    //loading texture "main_menu_background"
     m_shared_context->m_textureManager->loadResource("main_menu_background");
     m_shared_context->m_eventManager->registerCallback(StateType::Menu,
                                                        "arrowKeyUp",
@@ -33,6 +33,7 @@ m_gui_buttons(), m_selected_item(0){
                                                        &MenuState::select,
                                                        this);
 
+    m_button_container = std::make_unique<Gui_Container>();
     setupGUI();
     m_font.setSmooth(false);
 }
@@ -45,18 +46,14 @@ MenuState::~MenuState() {
 
 void MenuState::on_create() {
     Logger::getInstance().log("MenuState::on_create()");
-    std::string filePath = Utils::get_project_path() + "/resources/graphics/main_menu.png";
-    m_backgroundTexture = std::make_unique<sf::Texture>();
-    if(!m_backgroundTexture->loadFromFile(filePath)){
-        Logger::getInstance().log("MenuState::oncreate - could not load backgroundtexture");
-    }
-    m_backgroundSprite = std::make_unique<sf::Sprite>(*m_backgroundTexture);
-    m_view = sf::View{sf::Vector2f{float(m_backgroundTexture->getSize().x) / 2.f, float(m_backgroundTexture->getSize().y) / 2.f},
-                      sf::Vector2f{float(m_backgroundTexture->getSize().x), float(m_backgroundTexture->getSize().y)}};
+    sf::Texture& background_texture = *m_shared_context->m_textureManager->get("main_menu_background");
+    m_backgroundSprite = std::make_unique<sf::Sprite>(background_texture);
+    sf::Vector2f center = {float(background_texture.getSize().x) / 2.f, float(background_texture.getSize().y) / 2.f};
+    sf::Vector2f size = {float(background_texture.getSize().x), float(background_texture.getSize().y)};
+    m_view = sf::View{center,size};
 }
 void MenuState::on_activate() {
     Logger::getInstance().log("MenuState::on_activate()");
-
 }
 void MenuState::on_deactivate(){
     Logger::getInstance().log("MenuState::on_deactivate()");
@@ -66,42 +63,44 @@ void MenuState::on_destroy() {
     Logger::getInstance().log("MenuState::on_destroy()");
 }
 
-void MenuState::update(float l_dt){
-
+void MenuState::update(float l_dt) {
+    m_button_container->update(l_dt);
 }
 
 void MenuState::draw(){
     m_shared_context->m_window->getRenderWindow()->draw(*m_backgroundSprite);
-    for (auto& button : m_gui_buttons) {
-         button->draw(m_shared_context->m_window->getRenderWindow());
-    }
+    m_button_container->render(m_shared_context->m_window->getRenderWindow());
 }
 
 void MenuState::setupGUI() {
-    auto new_game_button = std::make_unique<Button>(&m_font);
+    std::unique_ptr<Button> new_game_button = std::make_unique<Button>(&m_font);
     new_game_button->setText("New Game");
     new_game_button->setTextSize(10);
-    new_game_button->setPosition({100.f,100.f});
-    new_game_button->set_text_fill_color(sf::Color::White);
-    new_game_button->setCallback([this] { startGame(); });
+    new_game_button->setCallback([this]() {
+        startGame();
+    });
 
-    auto options_game_button = std::make_unique<Button>(&m_font);
-    options_game_button->setText("Options");
-    options_game_button->setTextSize(10);
-    options_game_button->setPosition({100.f,110.f});
-    options_game_button->set_text_fill_color(sf::Color::White);
+    std::unique_ptr<Button> options_button = std::make_unique<Button>(&m_font);
+    options_button->setText("Options");
+    options_button->setTextSize(10);
+    options_button->setPosition({0.f, 5.f});
 
-    auto quit_game_button = std::make_unique<Button>(&m_font);
-    quit_game_button->setText("Quit");
-    quit_game_button->setTextSize(10);
-    quit_game_button->setPosition({100.f,120.f});
-    quit_game_button->set_text_fill_color(sf::Color::White);
-    quit_game_button->setCallback( [this](){quitGame(); });
-    m_gui_buttons.push_back(std::move(new_game_button));
-    m_gui_buttons.push_back(std::move(options_game_button));
-    m_gui_buttons.push_back(std::move(quit_game_button));
+    std::unique_ptr<Button> quit_button = std::make_unique<Button>(&m_font);
+    quit_button->setText("Quit");
+    quit_button->setTextSize(10);
+    quit_button->setPosition({0.f, 10.f});
+    quit_button->setCallback([this]() {
+    quitGame();
+});
 
-    m_gui_buttons[m_selected_item]->set_text_fill_color(sf::Color::Red);
+
+    m_button_container->add_child(std::move(new_game_button));
+    m_button_container->add_child(std::move(options_button));
+    m_button_container->add_child(std::move(quit_button));
+    // select first option ("new game")
+    m_button_container->selectElementAt(2);
+
+    m_button_container->setPosition({100.f,100.f});
 }
 void MenuState::quitGame() {
     m_shared_context->m_stateManager->switch_state(StateType::Quit);
@@ -113,24 +112,17 @@ void MenuState::startGame() {
 
 void MenuState::keyArrowUp(EventDetails* l_details){
     Logger::getInstance().log("MenuState::keyArrowUp");
-    m_gui_buttons[m_selected_item]->set_text_fill_color(sf::Color::White);
-    m_selected_item = (m_selected_item - 1);
-    if (m_selected_item < 0) m_selected_item = m_gui_buttons.size() - 1;
-
-    m_gui_buttons[m_selected_item]->set_text_fill_color(sf::Color::Red);
+    m_button_container->select_previous_selectable();
 }
 
 void MenuState::keyArrowDown(EventDetails* l_details){
     Logger::getInstance().log("MenuState::keyArrowDown");
-
-
-    m_gui_buttons[m_selected_item]->set_text_fill_color(sf::Color::White);
-    m_selected_item = (m_selected_item + 1) % m_gui_buttons.size();
-    m_gui_buttons[m_selected_item]->set_text_fill_color(sf::Color::Red);
+    m_button_container->select_next_selectable();
 
 }
 
 void MenuState::select(EventDetails* l_details){
     Logger::getInstance().log("MenuState::select");
-    m_gui_buttons[m_selected_item]->on_click();
+    m_button_container->on_click<Button>();
+//    m_gui_buttons[m_selected_item]->on_click();
 }

@@ -13,8 +13,9 @@ module SharedState;
 
 
 Button::Button(sf::Font* l_font)
-    : m_text(*l_font)
-{}
+    : m_text(*l_font) {
+    set_selectable(true);
+}
 
 void Button::read_in(std::stringstream& l_ss) { }
 void Button::on_click(const sf::Vector2f& l_mousePos) {
@@ -27,8 +28,10 @@ bool Button::handleEvent(const sf::Event& l_event) {
     return false;
 }
 void Button::update(const float& l_dt) { }
-void Button::draw(sf::RenderTarget* l_render_target) {
-    l_render_target->draw(m_text);
+void Button::on_render(sf::RenderTarget* l_render_target, const sf::Transform& l_transform){
+    sf::RenderStates state;
+    state.transform = l_transform;
+    l_render_target->draw(m_text, state);
 }
 void Button::setPosition(const sf::Vector2f l_position) {
     Gui_Element::setPosition(l_position);
@@ -54,4 +57,12 @@ void Button::setTextSize(const int l_textSize) {
 }
 void Button::setCallback(std::function<void()>&& l_callback) {
     m_callback = l_callback;
+}
+void Button::set_selected(bool l_selected) {
+    Gui_Element::set_selected(l_selected);
+    if (isSelected()) {
+        m_text.setFillColor(sf::Color::Red);
+    }else {
+        m_text.setFillColor(sf::Color::White);
+    }
 }

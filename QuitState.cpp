@@ -29,6 +29,7 @@ QuitState::QuitState(SharedContext* l_context)
 
     m_is_transparent = true;
     m_is_transcendent = false;
+    m_gui_container = std::make_unique<Gui_Container>();
     setupGui();
 }
 QuitState::~QuitState() {
@@ -41,7 +42,6 @@ void QuitState::on_create() {
 
 void QuitState::on_activate() {
     Logger::getInstance().log("QuitState::on_activate");
-    m_shared_context->m_stateManager->print_states_to_console();
 
 }
 void QuitState::on_deactivate()  {
@@ -55,10 +55,7 @@ void QuitState::update(float l_dt) {
 
 }
 void QuitState::draw() {
-    m_label->draw(m_shared_context->m_window->getRenderWindow());
-    for(auto& gui_element : m_buttons){
-        gui_element->draw(m_shared_context->m_window->getRenderWindow());
-    }
+    m_gui_container->render(m_shared_context->m_window->getRenderWindow());
 }
 
 void QuitState::setupGui(){
@@ -68,7 +65,6 @@ void QuitState::setupGui(){
     std::unique_ptr<Button> button1 = std::make_unique<Button>(&m_font);
     button1->setText("Yes");
     button1->setPosition({0.f, 25.f});
-    button1->set_text_fill_color(sf::Color::Red);
     button1->setCallback([this]() {
         m_shared_context->m_stateManager->clear();
     });
@@ -78,30 +74,25 @@ void QuitState::setupGui(){
     button2->setCallback([this]() {
         m_shared_context->m_stateManager->switch_state(StateType::Menu);
     });
-    m_buttons.emplace_back(std::move(button1));
-    m_buttons.emplace_back(std::move(button2));
+    m_gui_container->add_child(std::move(m_label));
+    m_gui_container->add_child(std::move(button1));
+    m_gui_container->add_child(std::move(button2));
+    m_gui_container->selectElementAt(2);
 
 }
 
 void QuitState::arrow_key_left(EventDetails* l_details){
     Logger::getInstance().log("QuitState::keyArrowUp");
 
-    m_buttons[m_selected_button]->set_text_fill_color(sf::Color::White);
-    m_selected_button = (m_selected_button - 1);
-    if (m_selected_button < 0) m_selected_button = m_buttons.size() - 1;
-
-    m_buttons[m_selected_button]->set_text_fill_color(sf::Color::Red);
+    m_gui_container->select_previous_selectable();
 }
 
 void QuitState::arrow_key_right(EventDetails* l_details){
     Logger::getInstance().log("QuitState::keyArrowDown");
-
-    m_buttons[m_selected_button]->set_text_fill_color(sf::Color::White);
-    m_selected_button = (m_selected_button + 1) % m_buttons.size();
-    m_buttons[m_selected_button]->set_text_fill_color(sf::Color::Red);
+    m_gui_container->select_next_selectable();
 
 }
 void QuitState::select(EventDetails* l_details){
     Logger::getInstance().log("QuitState::select");
-    m_buttons[m_selected_button]->on_click();
+    m_gui_container->on_click<Button>();
 }

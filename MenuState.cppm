@@ -13,6 +13,7 @@ import :BaseState;
 import :SharedContext;
 import :EventDetails;
 import :Button;
+import :Gui_Container;
 
 export class MenuState : public BaseState{
 public:
@@ -34,9 +35,11 @@ private:
 private:
     void setupGUI();
 
-    std::unique_ptr<sf::Texture> m_backgroundTexture;
+
     std::unique_ptr<sf::Sprite> m_backgroundSprite;
-    std::vector<std::unique_ptr<Button>> m_gui_buttons;
+    std::unique_ptr<Gui_Container> m_button_container;
+//    std::vector<std::unique_ptr<Button>> m_gui_buttons;
+
     sf::Font m_font;
     int m_selected_item;
 

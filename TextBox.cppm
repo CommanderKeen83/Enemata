@@ -19,7 +19,7 @@ public:
     virtual void on_click(const sf::Vector2f& l_mousePos) override;
     virtual bool handleEvent(const sf::Event& l_event) override;
     virtual void update(const float& l_dt) override;
-    virtual void draw(sf::RenderTarget* l_render_target) override;
+    void on_render(sf::RenderTarget* l_render_target, const sf::Transform& l_transform) override;
 
     // custom methods for Label
     std::string getText() const;

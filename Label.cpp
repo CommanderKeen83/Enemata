@@ -18,8 +18,10 @@ bool Label::handleEvent(const sf::Event& l_event) {
     return false;
 }
 void Label::update(const float& l_dt) { }
-void Label::draw(sf::RenderTarget* l_render_target) {
-    l_render_target->draw(m_text);
+void Label::on_render(sf::RenderTarget* l_render_target, const sf::Transform& l_transform) {
+    sf::RenderStates state;
+    state.transform = l_transform;
+    l_render_target->draw(m_text, state);
 }
 
 void Label::setText(const std::string_view l_text) {

@@ -20,7 +20,7 @@ public:
             Logger::getInstance().log("Error in TextureManager::load: could not open " + std::string(l_id));
             throw std::runtime_error("Error in TextureManager::load: could not open " + std::string(l_id));
         }
-        Logger::getInstance().log("loaded texture: " + std::string(l_id));
+        Logger::getInstance().log("TextureMaanger:load: loaded texture: " + std::string(l_id));
         return texture;
     }
 };

@@ -9,12 +9,12 @@ set(SOURCES main.cpp
         MenuState.cpp
         GameState.cpp
         Gui_Manager.cpp
-        Gui_Element.cpp
         Button.cpp
         Label.cpp
         Slider.cpp
         TextBox.cpp
         QuitState.cpp
+        Gui_Container.cppm
 
 )
 
@@ -60,6 +60,7 @@ target_sources(ConsoleEnemata
         Logger.cppm
         Gui_Manager.cppm
         Gui_Element.cppm
+        Gui_Container.cppm
         Gui_Style.cppm
         Button.cppm
         Label.cppm
