@@ -59,7 +59,7 @@ void QuitState::draw() {
 }
 
 void QuitState::setupGui(){
-    m_label = std::make_unique<Label>(&m_font);
+    std::unique_ptr<Label> m_label = std::make_unique<Label>(&m_font);
     m_label->setText("Do you want to quit?");
 
     std::unique_ptr<Button> button1 = std::make_unique<Button>(&m_font);
@@ -77,8 +77,7 @@ void QuitState::setupGui(){
     m_gui_container->add_child(std::move(m_label));
     m_gui_container->add_child(std::move(button1));
     m_gui_container->add_child(std::move(button2));
-    m_gui_container->selectElementAt(2);
-
+    m_gui_container->selectElementAt(1);
 }
 
 void QuitState::arrow_key_left(EventDetails* l_details){
@@ -94,5 +93,5 @@ void QuitState::arrow_key_right(EventDetails* l_details){
 }
 void QuitState::select(EventDetails* l_details){
     Logger::getInstance().log("QuitState::select");
-    m_gui_container->on_click<Button>();
+    m_gui_container->on_click();
 }

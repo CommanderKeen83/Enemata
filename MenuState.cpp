@@ -98,14 +98,16 @@ void MenuState::setupGUI() {
     m_button_container->add_child(std::move(options_button));
     m_button_container->add_child(std::move(quit_button));
     // select first option ("new game")
-    m_button_container->selectElementAt(2);
+    m_button_container->selectElementAt(0);
 
     m_button_container->setPosition({100.f,100.f});
 }
 void MenuState::quitGame() {
+    Logger::getInstance().log("MenuState::quitGame");
     m_shared_context->m_stateManager->switch_state(StateType::Quit);
 }
 void MenuState::startGame() {
+    Logger::getInstance().log("MenuState::startGame");
     m_shared_context->m_stateManager->switch_state(StateType::Game);
 }
 
@@ -123,6 +125,6 @@ void MenuState::keyArrowDown(EventDetails* l_details){
 
 void MenuState::select(EventDetails* l_details){
     Logger::getInstance().log("MenuState::select");
-    m_button_container->on_click<Button>();
+    m_button_container->on_click();
 //    m_gui_buttons[m_selected_item]->on_click();
 }

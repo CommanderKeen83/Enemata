@@ -35,8 +35,6 @@ private:
     void select(EventDetails* l_details = nullptr);
 
     std::unique_ptr<Gui_Container>          m_gui_container;
-    std::unique_ptr<Label>                  m_label;
-//    std::vector<std::unique_ptr<Button>>    m_buttons;
     sf::Font                                m_font;
     int                                     m_selected_button = 0; // Label sits on position 0 in m_gui_elements
 };
