@@ -37,8 +37,8 @@ export namespace Utils {
 		DWORD size = GetModuleFileNameA(NULL, temp_result, MAX_PATH_LENGTH);
 		if (size > 0) {
 			std::string substring{ temp_result };
-			substring = substring.substr(0, substring.find_last_of("\\"));
-			substring = substring.substr(0, substring.find_last_of("\\"));
+			substring = substring.substr(0, substring.find_last_of('\\'));
+			substring = substring.substr(0, substring.find_last_of('\\'));
 			result = substring;
 		}
 		else {

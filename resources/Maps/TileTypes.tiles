@@ -1,0 +1,9 @@
+# Type      ||      ID  ||      TileProperty        ||      Drag (min: 0, max:10)  ||         Hazard (dmg per second)
+Grass               1           Walkable                    3                                   0
+Water               2           Solid                       10                                  2
+Lava                3           Hazard                      5                                   5
+Sand                4           Slow                        8                                   0
+Ice                 5           Slippery                    1                                   0
+Brick               6           Solid                       10                                  0
+Wall                7           Solid                       10                                  0
+Teleport            8           Teleport                    0                                   0

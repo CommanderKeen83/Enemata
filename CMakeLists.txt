@@ -68,6 +68,8 @@ target_sources(ConsoleEnemata
         TextBox.cppm
         ResourceManager.cppm
         TextureManager.cppm
+        Map.cppm
+        Tiles.cppm
 )
 
 # Link external libraries

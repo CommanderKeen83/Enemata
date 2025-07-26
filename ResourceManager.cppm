@@ -55,11 +55,11 @@ class ResourceManager {
                 return;
             }
             // if not loaded, load it to resources
-            std::string filePath = Utils::formatPath(Utils::get_project_path() + *resourcePath);
+            std::string filePath = Utils::formatPath(Utils::get_project_path() + "\\" + *resourcePath);
             Logger::getInstance().log("ResourceManager::loadResource: Resource id " + l_id +
             " not loaded yet, loading from path " + filePath);
             std::unique_ptr<T> resource = load(filePath);
-            m_resources.emplace(l_id, std::make_pair(std::move(resource), 0));
+            m_resources.emplace(l_id, std::make_pair(std::move(resource), 1));
         }else{
             // resource is not available, just log it
             Logger::getInstance().log("Error in ResourceManager::loadResource: could not load " + l_id);
