@@ -3,12 +3,13 @@
 //
 
 module;
-
+#include <memory>
 
 export module SharedState:GameState;
 
 import :BaseState;
 import :SharedContext;
+import Map;
 
 export class GameState : public BaseState{
 public:
@@ -24,4 +25,5 @@ private:
 
     void update(float l_dt) override;
     void draw() override;
+    std::unique_ptr<Map> m_map = nullptr;
 };

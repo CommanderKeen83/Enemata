@@ -11,8 +11,10 @@ module SharedState;
 import :SharedContext;
 import :BaseState;
 import Logger;
+import Utils;
+
 QuitState::QuitState(SharedContext* l_context)
-    : BaseState(l_context), m_font("Arial.ttf"){
+    : BaseState(l_context), m_font(Utils::formatPath(Utils::get_project_path() + "\\" + "resources/fonts/arial_unicode.ttf")){
     Logger::getInstance().log("QuitState::QuitState");
     m_shared_context->m_eventManager->registerCallback(StateType::Quit,
                                                        "arrow_key_left",

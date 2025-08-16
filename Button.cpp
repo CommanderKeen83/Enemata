@@ -61,8 +61,15 @@ void Button::setCallback(std::function<void()>&& l_callback) {
 void Button::set_selected(bool l_selected) {
     Gui_Element::set_selected(l_selected);
     if (isSelected()) {
-        m_text.setFillColor(sf::Color::Red);
+        m_text.setFillColor(m_selectedColor);
     }else {
-        m_text.setFillColor(sf::Color::White);
+        m_text.setFillColor(m_unSelectedColor);
     }
+}
+
+void Button::setSelectedColor(sf::Color l_color){
+    m_selectedColor = l_color;
+}
+void Button::setUnSelectedColor(sf::Color l_color){
+    m_unSelectedColor = l_color;
 }

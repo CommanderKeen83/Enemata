@@ -1,9 +1,13 @@
-# Type      ||      ID  ||      TileProperty        ||      Drag (min: 0, max:10)  ||         Hazard (dmg per second)
-Grass               1           Walkable                    3                                   0
-Water               2           Solid                       10                                  2
-Lava                3           Hazard                      5                                   5
-Sand                4           Slow                        8                                   0
-Ice                 5           Slippery                    1                                   0
-Brick               6           Solid                       10                                  0
-Wall                7           Solid                       10                                  0
-Teleport            8           Teleport                    0                                   0
+# Type              ||  ID  ||      TileProperty        ||      Drag (min: 0, max:10)  ||         Hazard (dmg per second)
+HighGrassWalkable       1           Walkable                    4                                   0
+FlatGrassWalkable       2           Solid                       2                                 2
+SolidPath               3           Walkable                    1
+Lava                    4           Hazard                      5                                   5
+WalkableMud             5           Slow                        6                                   0
+HazardousMud            6           Hazard                      8                                   5
+SlowSand                7           Slow                        7
+Snow                    8           Slow                        6
+SlipperyIce             9           Slippery                    0.1                                   0
+Brick                   10          Solid                       10                                  0
+Wall                    11          Solid                       10                                  0
+Teleport                12          Teleport                    0                                   0

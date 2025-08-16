@@ -13,6 +13,8 @@ import Logger;
 GameState::GameState(SharedContext* l_context)
     : BaseState(l_context)
 {
+    m_map = std::make_unique<Map>();
+    m_map->load_map("map1.map");
     Logger::getInstance().log("GameState::GameState");
 }
 GameState::~GameState(){

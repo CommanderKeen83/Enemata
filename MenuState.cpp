@@ -16,7 +16,10 @@ import Utils;
 
 
 MenuState::MenuState(SharedContext* l_context)
-: BaseState(l_context), m_font("Arial.ttf"), m_selected_item(0){
+:
+BaseState(l_context)
+, m_font(Utils::formatPath(Utils::get_project_path() + "\\" + "resources/fonts/arial_unicode.ttf"))
+, m_selected_item(0){
     Logger::getInstance().log("MenuState::MenuState");
     //loading texture "main_menu_background"
     m_shared_context->m_textureManager->loadResource("main_menu_background");

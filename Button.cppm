@@ -38,7 +38,11 @@ public:
     void set_text_fill_color(const sf::Color l_color);
     void setTextSize(const int l_textSize);
     void setCallback(std::function<void()>&& l_callback);
+    void setSelectedColor(sf::Color l_color);
+    void setUnSelectedColor(sf::Color l_color);
 private:
     sf::Text m_text;
     std::function<void()> m_callback;
+    sf::Color m_selectedColor = sf::Color::Red;
+    sf::Color m_unSelectedColor = sf::Color::White;
 };

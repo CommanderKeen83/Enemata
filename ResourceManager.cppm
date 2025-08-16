@@ -3,12 +3,12 @@
 //
 module;
 #include <unordered_map>
-#include <vector>
 #include <memory>
 #include <fstream>
 #include <sstream>
 #include <functional>
 #include <optional>
+
 export module SharedState:ResourceManager;
 
 import Logger;
@@ -56,6 +56,7 @@ class ResourceManager {
             }
             // if not loaded, load it to resources
             std::string filePath = Utils::formatPath(Utils::get_project_path() + "\\" + *resourcePath);
+
             Logger::getInstance().log("ResourceManager::loadResource: Resource id " + l_id +
             " not loaded yet, loading from path " + filePath);
             std::unique_ptr<T> resource = load(filePath);
