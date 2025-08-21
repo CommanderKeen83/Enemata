@@ -19,7 +19,7 @@ module;
 export module Utils;
 
 export namespace Utils {
-    std::string toLower(const std::string& l_str){
+    std::string to_lower(const std::string& l_str){
         std::string result = l_str;
         for(auto& chr : result){
             chr = (char)tolower(chr);

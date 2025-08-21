@@ -36,7 +36,9 @@ public:
     template<typename T>
     void registerCallback(StateType l_stateType, const std::string& l_name, void (T::*func)(EventDetails* ), T* l_instance){
         //bind passed member function to instance and reserve placeholder to be able to pass parameter when invoking this bound function
-        auto boundFunction = std::bind(func, l_instance, std::placeholders::_1);
+        auto boundFunction = [l_instance, func](EventDetails* details) {
+            (l_instance->*func)(details);
+        };
         if(!m_callbacks[l_stateType].emplace(l_name, boundFunction).second){
             std::string errorMessage{ "Error in EventManager::registerCallback - could not register Callback " + l_name};
             Logger::getInstance().log(errorMessage);

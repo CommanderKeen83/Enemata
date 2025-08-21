@@ -5,6 +5,8 @@ module;
 #include <string>
 export module Tiles;
 
+import Utils;
+
 export enum class TileType {
     Unknown = -1,
     HighGrassWalkable,
@@ -21,16 +23,20 @@ export enum class TileType {
     Teleport,
 };
 export TileType convert_string_to_TileType(const std::string& str) {
+    std::string entry = Utils::to_lower(str);
 
     if (str == "HighGrassWalkable") return TileType::HighGrassWalkable;
-    else if (str == "FlatGrassWalkable") return TileType::FlatGrassWalkable;
-    else if (str == "WalkableMud") return TileType::WalkableMud;
-    else if (str == "HazardousMud") return TileType::HazardousMud;
-    else if (str == "SlowSand") return TileType::SlowSand;
-    else if (str == "SlipperySnow") return TileType::SlipperySnow;
-    else if (str == "SlipperyIce") return TileType::SlipperyIce;
-    else if (str == "SolidPath") return TileType::SolidPath;
-    else if (str == "Teleport") return TileType::Teleport;
+    else if (entry == "flatgrasswalkable") return TileType::FlatGrassWalkable;
+    else if (entry == "solidpath") return TileType::SolidPath;
+    else if (entry == "lava") return TileType::Lava;
+    else if (entry == "walkablemud") return TileType::WalkableMud;
+    else if (entry == "hazardousmud") return TileType::HazardousMud;
+    else if (entry == "slowsand") return TileType::SlowSand;
+    else if (entry == "snow") return TileType::Snow;
+    else if (entry == "slipperyice") return TileType::SlipperyIce;
+    else if (entry == "brick") return TileType::Brick;
+    else if (entry == "wall") return TileType::Wall;
+    else if (entry == "teleport") return TileType::Teleport;
     else return TileType::Unknown;
 }
 /**

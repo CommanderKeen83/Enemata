@@ -113,7 +113,7 @@ EventType convert_SFMLEventtype_to_EventType(const sf::Event& l_sfml_event){
     else throw std::runtime_error("Error in EventType::convert_SFMLEventType_to_EventType(...): No appropriate SFML-Event received.");
 }
 std::variant<sf::Keyboard::Key,sf::Mouse::Button> get_input_from_string(const std::string& l_key){
-    std::string lowercase_key = Utils::toLower(l_key);
+    std::string lowercase_key = Utils::to_lower(l_key);
          if(lowercase_key == "a") return sf::Keyboard::Key::A;            //!< The A key
     else if(lowercase_key == "b") return sf::Keyboard::Key::B;            //!< The B key
     else if(lowercase_key == "c") return sf::Keyboard::Key::C;            //!< The C key

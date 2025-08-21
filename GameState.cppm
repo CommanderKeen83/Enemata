@@ -9,7 +9,7 @@ export module SharedState:GameState;
 
 import :BaseState;
 import :SharedContext;
-import Map;
+import :Map;
 
 export class GameState : public BaseState{
 public:

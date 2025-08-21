@@ -9,11 +9,11 @@ module;
 module SharedState;
 
 import Logger;
-
+import :Map;
 GameState::GameState(SharedContext* l_context)
     : BaseState(l_context)
 {
-    m_map = std::make_unique<Map>();
+    m_map = std::make_unique<Map>(l_context->m_textureManager, "tileset_level_1");
     m_map->load_map("map1.map");
     Logger::getInstance().log("GameState::GameState");
 }
